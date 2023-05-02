@@ -70,7 +70,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customers.
+        ///   Looks up a localized string similar to Клиенты.
         /// </summary>
         public static string CustomersPageTitle {
             get {
@@ -205,7 +205,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customers.
+        ///   Looks up a localized string similar to Клиенты.
         /// </summary>
         public static string ShellCustomersPage {
             get {

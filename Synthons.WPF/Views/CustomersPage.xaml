@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
     xmlns:properties="clr-namespace:Synthons.WPF.Properties" 
     xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels" 
-    d:DataContext="{d:DesignInstance Type=viewmodels:CustomersViewModel}"
+    md:DialogServiceViews.IsRegistered="True"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewmodels:CustomersViewModel}"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,29 +21,30 @@
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.CustomersPageTitle}" />
-        <Grid Grid.Row="1">
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddCustomerCommand}" Content="Добавить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding EditCustomerCommand}" Content="Изменить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding DeleteCustomerCommand}" Content="Удалить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+            </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal"
                 CanUserAddRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding Source}"
+                SelectedItem="{Binding SelectedCustomer}"
                 Margin="{StaticResource SmallLeftRightMargin}"
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
-                    <!--
-                        TODO:
-                        Remove this column definitions and define columns for your data.
-                        Consider adding header properties to Resources.resw
-                    -->
-                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                    <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
-                    <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" />
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="Имя" />
+                    <DataGridTextColumn Binding="{Binding MiddleName}" Header="Отчество" />
+                    <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Телефон" />
                     <DataGridTextColumn Binding="{Binding EmailAddress}" Header="Email" />
-                    <DataGridTextColumn Binding="{Binding BirthDate}" Header="Birthdate" />
+                    <DataGridTextColumn Binding="{Binding BirthDate}" Header="Дата рождения" />
                 </DataGrid.Columns>
             </DataGrid>
-        </Grid>
+        </StackPanel>
     </Grid>
 </Page>

@@ -11,7 +11,6 @@
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
@@ -29,6 +28,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddCustomerDialog.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 

@@ -160,10 +160,10 @@
     <value>Сотрудники</value>
   </data>
   <data name="ShellCustomersPage" xml:space="preserve">
-    <value>Customers</value>
+    <value>Клиенты</value>
   </data>
   <data name="CustomersPageTitle" xml:space="preserve">
-    <value>Customers</value>
+    <value>Клиенты</value>
   </data>
   <data name="ShellServicesPage" xml:space="preserve">
     <value>Services</value>
