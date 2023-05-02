@@ -7,9 +7,8 @@ namespace Synthons.WPF.Views;
 /// </summary>
 public partial class AddEmployeeDialog : MetroWindow
 {
-    public AddEmployeeDialog(AddEmployeeViewModel viewModel)
+    public AddEmployeeDialog()
     {
         InitializeComponent();
-        DataContext = viewModel;
     }
 }

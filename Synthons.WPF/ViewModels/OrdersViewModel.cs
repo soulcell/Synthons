@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
+using MvvmDialogs;
 using Synthons.Domain;
 using Synthons.Infrastructure;
 using Synthons.WPF.Contracts.Services;
@@ -59,7 +60,7 @@ public class OrdersViewModel : ObservableObject, INavigationAware
         //window.ShowDialog();
 
         //_windowManager.OpenInDialog(typeof(EditSaleViewModel).FullName, new Sale());
-        _dialogService.ShowDialog(typeof(AddSaleViewModel).FullName);
+        //_dialogService.ShowDialog(typeof(AddSaleViewModel).FullName);
 
     }
 }

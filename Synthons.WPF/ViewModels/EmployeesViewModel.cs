@@ -1,25 +1,27 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
+using MvvmDialogs;
 using Synthons.Domain;
 using Synthons.Infrastructure;
-using Synthons.WPF.Contracts.Services;
 using Synthons.WPF.Contracts.ViewModels;
-using Synthons.WPF.Core.Contracts.Services;
-using Synthons.WPF.Core.Models;
+using Synthons.WPF.Views;
 
 namespace Synthons.WPF.ViewModels;
 
-public class EmployeesViewModel : ObservableObject, INavigationAware
+public partial class EmployeesViewModel : ObservableObject, INavigationAware
 {
     private readonly SynthonsDbContext _context;
     private readonly IDialogService _dialogService;
-    private ICommand _addEmployeeCommand;
-    public ObservableCollection<Employee> Source { get; } = new ObservableCollection<Employee>();
 
-    public ICommand AddEmployeeCommand => _addEmployeeCommand ?? (_addEmployeeCommand = new RelayCommand(OnAddEmployee));
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(EditEmployeeCommand))]
+    [NotifyCanExecuteChangedFor(nameof(DeleteEmployeeCommand))]
+    private Employee? selectedEmployee;
+
+    public ObservableCollection<Employee> Source { get; } = new ObservableCollection<Employee>();
 
     public EmployeesViewModel(SynthonsDbContext context, IDialogService dialogService)
     {
@@ -36,11 +38,71 @@ public class EmployeesViewModel : ObservableObject, INavigationAware
     {
     }
 
-    private async void OnAddEmployee()
+
+    [RelayCommand]
+    private async Task AddEmployeeAsync()
     {
-        _dialogService.ShowDialog(typeof(AddEmployeeViewModel).FullName);
+        var dialogViewModel = new AddEmployeeViewModel(_context);
+
+        var success = _dialogService.ShowDialog<AddEmployeeDialog>(this, dialogViewModel);
+
+        if (success != true) return;
+
+        var employee = new Employee()
+        {
+            LastName = dialogViewModel.LastName,
+            FirstName = dialogViewModel.FirstName,
+            MiddleName = dialogViewModel.MiddleName,
+            BirthDate = dialogViewModel.BirthDate
+        };
+
+        await _context.Employees.AddAsync(employee);
+        await _context.SaveChangesAsync();
+
         await RefreshData();
     }
+
+    [RelayCommand(CanExecute = nameof(CanEdit))]
+    private async Task EditEmployeeAsync()
+    {
+        var dialogViewModel = new AddEmployeeViewModel(_context, SelectedEmployee);
+
+        var success = _dialogService.ShowDialog<AddEmployeeDialog>(this, dialogViewModel);
+        if (success != true) return;
+
+        var employee = await _context.Employees.FindAsync(SelectedEmployee.EmployeeId);
+        if (employee == null) return;
+
+        employee.LastName = dialogViewModel.LastName;
+        employee.FirstName = dialogViewModel.FirstName;
+        employee.MiddleName = dialogViewModel.MiddleName;
+        employee.BirthDate = dialogViewModel.BirthDate;
+
+        await _context.SaveChangesAsync();
+        await RefreshData();
+    }
+
+    [RelayCommand(CanExecute = nameof(CanEdit))]
+    private async Task DeleteEmployeeAsync()
+    {
+        var success = _dialogService.ShowMessageBox(
+            this,
+            $"Вы уверены что хотите удалить {SelectedEmployee.FullName}?",
+            $"Удалить {SelectedEmployee.FullName}",
+            System.Windows.MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (success != MessageBoxResult.Yes) return;
+
+        var employee = await _context.Employees.FindAsync(SelectedEmployee.EmployeeId);
+        if (employee == null) return;
+
+        _context.Employees.Remove(employee);
+        await _context.SaveChangesAsync();
+        await RefreshData();
+    }
+
+    private bool CanEdit() => SelectedEmployee != null;
 
     private async Task RefreshData()
     {

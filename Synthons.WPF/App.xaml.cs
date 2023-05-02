@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using MvvmDialogs;
 using Synthons.Infrastructure;
 using Synthons.WPF.Contracts.Services;
 using Synthons.WPF.Contracts.Views;

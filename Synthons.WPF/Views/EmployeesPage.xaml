@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
     xmlns:properties="clr-namespace:Synthons.WPF.Properties" 
     xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels" 
-    d:DataContext="{d:DesignInstance Type=viewmodels:EmployeesViewModel}"
     mc:Ignorable="d"
+    md:DialogServiceViews.IsRegistered="True"
+    d:DataContext="{d:DesignInstance Type=viewmodels:EmployeesViewModel}"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,22 +23,23 @@
             Text="{x:Static properties:Resources.EmployeesPageTitle}" />
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding AddEmployeeCommand}" Content="Add" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Content="Edit" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Content="Delete" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding AddEmployeeCommand}" Content="Добавить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding EditEmployeeCommand}" Content="Изменить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding DeleteEmployeeCommand}" Content="Удалить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
             </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal"
                 CanUserAddRows="False"
                 ItemsSource="{Binding Source}"
+                SelectedItem="{Binding SelectedEmployee}"
                 Margin="{StaticResource SmallLeftRightMargin}"
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                    <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
-                    <DataGridTextColumn Binding="{Binding BirthDate, StringFormat=d}"  Header="Date of Birth" />
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" />
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="Имя" />
+                    <DataGridTextColumn Binding="{Binding MiddleName}" Header="Отчество" />
+                    <DataGridTextColumn Binding="{Binding BirthDate, StringFormat=d}"  Header="Дата рождения" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

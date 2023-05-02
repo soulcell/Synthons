@@ -1,52 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MvvmDialogs;
 using Synthons.Domain;
 using Synthons.Infrastructure;
-using Synthons.WPF.Contracts.ViewModels;
 
 namespace Synthons.WPF.ViewModels;
-public class AddEmployeeViewModel : ObservableObject, IDialog
+public partial class AddEmployeeViewModel : ObservableObject, IModalDialogViewModel
 {
     private readonly SynthonsDbContext _context;
-    private ICommand _addCommand;
 
-    public string LastName { get; set; }
-    public string FirstName { get; set; }
-    public string? MiddleName { get; set; }
+    private bool? dialogResult;
 
-    public DateTime? BirthDate { get; set; }
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    private string lastName;
 
-    public bool IsValid => LastName != null && FirstName != null;
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    private string firstName;
 
-    public ICommand AddCommand => _addCommand ?? (_addCommand = new AsyncRelayCommand(OnAdd));
+    [ObservableProperty]
+    private string? middleName;
+
+    [ObservableProperty]
+    private DateTime? birthDate;
 
     public AddEmployeeViewModel(SynthonsDbContext context)
     {
         _context = context;
     }
-    public void OnLoaded()
+    public AddEmployeeViewModel(SynthonsDbContext context, Employee employee)
     {
-    
+        _context = context;
+
+        LastName = employee.LastName;
+        FirstName = employee.FirstName;
+        MiddleName = employee.MiddleName;
+        BirthDate = employee.BirthDate;
+    }
+    public bool? DialogResult
+    {
+        get => dialogResult;
+        private set => SetProperty(ref dialogResult, value);
     }
 
-    public async Task OnAdd()
+    [RelayCommand(CanExecute = nameof(CanOk))]
+    private void OnOk()
     {
-        Employee employee = new Employee
-        {
-            LastName = LastName,
-            FirstName = FirstName,
-            MiddleName = MiddleName,
-            BirthDate = BirthDate
-        };
-
-        await _context.Employees.AddAsync(employee);
-
-        await _context.SaveChangesAsync();
+        DialogResult = true;
     }
+
+    private bool CanOk()
+    {
+        return (!string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(FirstName));
+    }
+
 }

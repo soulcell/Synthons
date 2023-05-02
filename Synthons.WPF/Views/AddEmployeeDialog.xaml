@@ -8,16 +8,16 @@
         xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:AddEmployeeViewModel}"
         mc:Ignorable="d"
-        Title="Add new employee" Width="400">
+        Title="Добавить сотрудника" Width="400" Height="Auto">
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
-        <Label>Last Name:</Label>
+        <Label>Фамилия:</Label>
         <TextBox Text="{Binding LastName}"/>
-        <Label>First Name:</Label>
+        <Label>Имя:</Label>
         <TextBox Text="{Binding FirstName}"/>
-        <Label>Middle Name:</Label>
+        <Label>Отчество:</Label>
         <TextBox Text="{Binding MiddleName}"/>
-        <Label>Date of birth:</Label>
+        <Label>Дата рождения:</Label>
         <DatePicker SelectedDate="{Binding BirthDate}"/>
-        <Button Command="{Binding AddCommand}" Content="Ok" Margin="{StaticResource MediumTopMargin}"/>
+        <Button Command="{Binding OkCommand}" Content="Ok" Margin="{StaticResource MediumTopMargin}"/>
     </StackPanel>
 </controls:MetroWindow>
