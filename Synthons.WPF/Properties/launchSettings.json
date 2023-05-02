@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Synthons.WPF": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SynthonsConnectionString": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=SYNTHONS;Integrated Security=True;"
+      }
+    }
+  }
+}

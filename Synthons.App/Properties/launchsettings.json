@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "Synthons.App (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Synthons.App (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}

@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "Synthons.WinUI3 (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Synthons.WinUI3 (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
