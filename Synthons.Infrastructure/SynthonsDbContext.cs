@@ -122,7 +122,7 @@ public partial class SynthonsDbContext : DbContext
 
             entity.HasOne(d => d.Employee).WithMany(p => p.Sales)
                 .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .HasConstraintName("FK__Sale__EmployeeID__47FBA9D6");
         });
 
@@ -146,7 +146,7 @@ public partial class SynthonsDbContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.SaleProducts)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .HasConstraintName("FK__SaleProdu__Produ__5555A4F4");
 
             entity.HasOne(d => d.Sale).WithMany(p => p.SaleProducts)
@@ -175,8 +175,9 @@ public partial class SynthonsDbContext : DbContext
 
             entity.HasOne(d => d.Service).WithMany(p => p.SaleServices)
                 .HasForeignKey(d => d.ServiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .HasConstraintName("FK__SaleServi__Servi__592635D8");
+
         });
 
         modelBuilder.Entity<Service>(entity =>
@@ -188,6 +189,7 @@ public partial class SynthonsDbContext : DbContext
             entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
             entity.Property(e => e.Description).HasMaxLength(1);
             entity.Property(e => e.Name).HasMaxLength(100);
+
         });
 
         modelBuilder.Entity<ServicePrice>(entity =>
@@ -203,6 +205,7 @@ public partial class SynthonsDbContext : DbContext
 
             entity.HasOne(d => d.Service).WithMany(p => p.ServicePrices)
                 .HasForeignKey(d => d.ServiceId)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .HasConstraintName("FK__ServicePr__Servi__51851410");
         });
 

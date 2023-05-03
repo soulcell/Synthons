@@ -106,7 +106,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Products.
+        ///   Looks up a localized string similar to Товары.
         /// </summary>
         public static string ProductsPageTitle {
             get {
@@ -115,7 +115,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Services.
+        ///   Looks up a localized string similar to Услуги.
         /// </summary>
         public static string ServicesPageTitle {
             get {
@@ -133,7 +133,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About this application.
+        ///   Looks up a localized string similar to О программе.
         /// </summary>
         public static string SettingsPageAboutTitle {
             get {
@@ -142,7 +142,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose Theme.
+        ///   Looks up a localized string similar to Выбрать тему.
         /// </summary>
         public static string SettingsPageChooseThemeText {
             get {
@@ -151,7 +151,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personalization.
+        ///   Looks up a localized string similar to Персонализация.
         /// </summary>
         public static string SettingsPagePersonalizationTitle {
             get {
@@ -169,7 +169,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dark.
+        ///   Looks up a localized string similar to Тёмная.
         /// </summary>
         public static string SettingsPageRadioButtonDarkTheme {
             get {
@@ -178,7 +178,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Light.
+        ///   Looks up a localized string similar to Светлая.
         /// </summary>
         public static string SettingsPageRadioButtonLightTheme {
             get {
@@ -187,7 +187,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default.
+        ///   Looks up a localized string similar to По умолчанию.
         /// </summary>
         public static string SettingsPageRadioButtonWindowsDefaultTheme {
             get {
@@ -196,7 +196,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Настройки.
         /// </summary>
         public static string SettingsPageTitle {
             get {
@@ -232,7 +232,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go back.
+        ///   Looks up a localized string similar to Назад.
         /// </summary>
         public static string ShellGoBackButton {
             get {
@@ -259,7 +259,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Products.
+        ///   Looks up a localized string similar to Товары.
         /// </summary>
         public static string ShellProductsPage {
             get {
@@ -268,7 +268,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Services.
+        ///   Looks up a localized string similar to Услуги.
         /// </summary>
         public static string ShellServicesPage {
             get {
@@ -277,7 +277,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Настройки.
         /// </summary>
         public static string ShellSettingsPage {
             get {

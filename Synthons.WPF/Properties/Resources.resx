@@ -124,34 +124,34 @@
     <value>EditSale</value>
   </data>
   <data name="ShellSettingsPage" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="SettingsPageTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="SettingsPageAboutText" xml:space="preserve">
     <value>Settings page placeholder text.  Your app description goes here.</value>
   </data>
   <data name="SettingsPageAboutTitle" xml:space="preserve">
-    <value>About this application</value>
+    <value>О программе</value>
   </data>
   <data name="SettingsPageChooseThemeText" xml:space="preserve">
-    <value>Choose Theme</value>
+    <value>Выбрать тему</value>
   </data>
   <data name="SettingsPagePersonalizationTitle" xml:space="preserve">
-    <value>Personalization</value>
+    <value>Персонализация</value>
   </data>
   <data name="SettingsPagePrivacyStatementText" xml:space="preserve">
     <value>Privacy Statement</value>
   </data>
   <data name="SettingsPageRadioButtonDarkTheme" xml:space="preserve">
-    <value>Dark</value>
+    <value>Тёмная</value>
   </data>
   <data name="SettingsPageRadioButtonLightTheme" xml:space="preserve">
-    <value>Light</value>
+    <value>Светлая</value>
   </data>
   <data name="SettingsPageRadioButtonWindowsDefaultTheme" xml:space="preserve">
-    <value>Default</value>
+    <value>По умолчанию</value>
   </data>
   <data name="ShellEmployeesPage" xml:space="preserve">
     <value>Сотрудники</value>
@@ -166,16 +166,16 @@
     <value>Клиенты</value>
   </data>
   <data name="ShellServicesPage" xml:space="preserve">
-    <value>Services</value>
+    <value>Услуги</value>
   </data>
   <data name="ServicesPageTitle" xml:space="preserve">
-    <value>Services</value>
+    <value>Услуги</value>
   </data>
   <data name="ShellProductsPage" xml:space="preserve">
-    <value>Products</value>
+    <value>Товары</value>
   </data>
   <data name="ProductsPageTitle" xml:space="preserve">
-    <value>Products</value>
+    <value>Товары</value>
   </data>
   <data name="ShellOrdersPage" xml:space="preserve">
     <value>Orders</value>
@@ -184,7 +184,7 @@
     <value>Orders</value>
   </data>
   <data name="ShellGoBackButton" xml:space="preserve">
-    <value>Go back</value>
+    <value>Назад</value>
   </data>
   <data name="ShellHamburgerButtonName" xml:space="preserve">
     <value>Open or close navigation</value>
