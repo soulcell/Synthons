@@ -97,7 +97,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orders.
+        ///   Looks up a localized string similar to Продажи.
         /// </summary>
         public static string OrdersPageTitle {
             get {
@@ -124,7 +124,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings page placeholder text.  Your app description goes here..
+        ///   Looks up a localized string similar to Курсовая работа по предмету &quot;Базы Данных&quot;\nВыполнил студент гр. 10701320 Солодков А.В..
         /// </summary>
         public static string SettingsPageAboutText {
             get {
@@ -250,7 +250,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orders.
+        ///   Looks up a localized string similar to Продажи.
         /// </summary>
         public static string ShellOrdersPage {
             get {

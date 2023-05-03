@@ -5,29 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
     xmlns:properties="clr-namespace:Synthons.WPF.Properties"
     xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels"
-    d:DataContext="{d:DesignInstance Type=viewmodels:OrdersViewModel}"
+    md:DialogServiceViews.IsRegistered="True"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewmodels:OrdersViewModel}"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.OrdersPageTitle}" />
-        <StackPanel 
-            Grid.Row="1" 
+        <StackPanel Grid.Row="1">
+            <StackPanel 
             Orientation="Horizontal"
             Margin="{StaticResource SmallLeftTopRightBottomMargin}">
-            <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding AddSaleCommand}">Add</Button>
-            <Button Margin="{StaticResource SmallRightMargin}">Filter</Button>
-        </StackPanel>
-        <Grid Grid.Row="2">
+                <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding AddSaleCommand}">Добавить</Button>
+                <Button Margin="{StaticResource SmallRightMargin}">Фильтр</Button>
+            </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal"
@@ -37,16 +37,11 @@
                 Margin="{StaticResource SmallLeftRightMargin}"
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
-                    <!--
-                        TODO:
-                        Remove this column definitions and define columns for your data.
-                        Consider adding header properties to Resources.resw
-                    -->
-                    <DataGridTextColumn Binding="{Binding SaleId}" Header="Id" />
-                    <DataGridTextColumn Binding="{Binding Customer.FullName}" Header="Customer"/>
-                    <DataGridTextColumn Binding="{Binding OrderDate}" Header="Order Date" />
-                    <DataGridTextColumn Binding="{Binding PaymentDate}" Header="Payment Date" />
-                    <DataGridTemplateColumn Header="Products">
+                    <DataGridTextColumn Binding="{Binding Customer.FullName}" Header="Клиент"/>
+                    <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="Сотрудник"/>
+                    <DataGridTextColumn Binding="{Binding OrderDate}" Header="Дата оформления" />
+                    <DataGridTextColumn Binding="{Binding PaymentDate}" Header="Дата оплаты" />
+                    <DataGridTemplateColumn Header="Товары">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <DataGrid 
@@ -58,13 +53,13 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Product.Name}"/>
                                         <DataGridTextColumn Binding="{Binding Qty}"/>
-                                        <DataGridTextColumn Binding="{Binding TotalPrice}"/>
+                                        <DataGridTextColumn Binding="{Binding TotalPrice, StringFormat=C}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Services">
+                    <DataGridTemplateColumn Header="Услуги">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <DataGrid 
@@ -75,16 +70,16 @@
                                     HeadersVisibility="None">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Service.Name}"/>
-                                        <DataGridTextColumn Binding="{Binding Price}"/>
+                                        <DataGridTextColumn Binding="{Binding Price, StringFormat=C}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding TotalDue}" Header="Total Due" />
+                    <DataGridTextColumn Binding="{Binding TotalDue, Mode=OneWay, StringFormat=C}" Header="Итого" />
                 </DataGrid.Columns>
             </DataGrid>
-        </Grid>
+        </StackPanel>
         <Canvas Grid.Row="2"/>
     </Grid>
 </Page>

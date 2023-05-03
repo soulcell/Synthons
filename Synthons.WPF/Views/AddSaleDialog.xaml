@@ -4,29 +4,68 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
         xmlns:local="clr-namespace:Synthons.WPF.Views"
         xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels"
+        md:DialogServiceViews.IsRegistered="True"
         d:DataContext="{d:DesignInstance Type=viewmodels:AddSaleViewModel}"
         mc:Ignorable="d"
         Style="{StaticResource CustomMetroWindow}"
-        Title="Add a new sale" Height="450" Width="320">
-    <StackPanel>
-        <Label>Choose a customer:</Label>
-        <ComboBox ItemsSource="{Binding Customers}" DisplayMemberPath="FullName"/>
-        <Label>Order processed by:</Label>
-        <ComboBox ItemsSource="{Binding Employees}" DisplayMemberPath="FullName"/>
-        <Label>Products:</Label>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SaleProducts}">
+        Title="Add a new sale" Width="450" SizeToContent="Height" d:DesignHeight="481.596" >
+    <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+        <Label>Клиент:</Label>
+        <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" DisplayMemberPath="FullName"/>
+        <Label>Заказ оформлен сотрудником:</Label>
+        <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" DisplayMemberPath="FullName"/>
+        <Label>Товары:</Label>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddProductCommand}" Margin="{StaticResource SmallRightMargin}">Добавить</Button>
+            <Button Command="{Binding RemoveSaleProductCommand}">Удалить</Button>
+        </StackPanel>
+        <DataGrid 
+            ItemsSource="{Binding SaleProducts}"
+            SelectedItem="{Binding SelectedSaleProduct, Mode=OneWayToSource}"
+            AutoGenerateColumns="False" 
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            GridLinesVisibility="Horizontal"
+            Margin="{StaticResource SmallTopMargin}"
+            >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Product.Name}"/>
-                <DataGridTextColumn Header="Qty" Binding="{Binding Qty}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding UnitPrice}"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding TotalPrice}"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Product.Name}"/>
+                <DataGridTextColumn Header="Цена/шт." Binding="{Binding UnitPrice, StringFormat=C}"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Qty}"/>
+                <DataGridTextColumn Header="Итого" Binding="{Binding TotalPrice, StringFormat=C}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Label>Услуги:</Label>
         <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding AddProductCommand}">Add</Button>
-            <Button>Remove</Button>
+            <Button Command="{Binding AddServiceCommand}" Margin="{StaticResource SmallRightMargin}">Добавить</Button>
+            <Button Command="{Binding RemoveSaleServiceCommand}">Удалить</Button>
         </StackPanel>
+        <DataGrid 
+            ItemsSource="{Binding SaleServices}"
+            SelectedItem="{Binding SelectedSaleService, Mode=OneWayToSource}"
+            AutoGenerateColumns="False" 
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            GridLinesVisibility="Horizontal"
+            Margin="{StaticResource SmallTopMargin}"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Service.Name}"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Margin="{StaticResource MediumTopMargin}">К оплате:</Label>
+        <TextBlock 
+            Text="{Binding Total, StringFormat=C, FallbackValue=$0.00}" 
+            FontSize="{StaticResource XLargeFontSize}" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Right"
+            />
+        <CheckBox IsChecked="{Binding IsPaid}" Content="Оплачено"/>
+        <Button Command="{Binding OkCommand}" Content="Ок" Margin="{StaticResource MediumTopMargin}"/>
     </StackPanel>
 </controls:MetroWindow>

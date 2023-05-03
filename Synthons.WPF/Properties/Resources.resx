@@ -130,7 +130,7 @@
     <value>Настройки</value>
   </data>
   <data name="SettingsPageAboutText" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>Курсовая работа по предмету "Базы Данных"\nВыполнил студент гр. 10701320 Солодков А.В.</value>
   </data>
   <data name="SettingsPageAboutTitle" xml:space="preserve">
     <value>О программе</value>
@@ -178,10 +178,10 @@
     <value>Товары</value>
   </data>
   <data name="ShellOrdersPage" xml:space="preserve">
-    <value>Orders</value>
+    <value>Продажи</value>
   </data>
   <data name="OrdersPageTitle" xml:space="preserve">
-    <value>Orders</value>
+    <value>Продажи</value>
   </data>
   <data name="ShellGoBackButton" xml:space="preserve">
     <value>Назад</value>

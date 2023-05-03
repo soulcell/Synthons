@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using MahApps.Metro.Controls;
-using Synthons.WPF.ViewModels;
+﻿using MahApps.Metro.Controls;
 
 namespace Synthons.WPF.Views;
 /// <summary>
@@ -8,9 +6,8 @@ namespace Synthons.WPF.Views;
 /// </summary>
 public partial class AddSaleDialog : MetroWindow
 {
-    public AddSaleDialog(AddSaleViewModel viewModel)
+    public AddSaleDialog()
     {
         InitializeComponent();
-        DataContext = viewModel;
     }
 }
