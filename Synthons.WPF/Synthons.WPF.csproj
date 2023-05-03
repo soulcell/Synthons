@@ -32,6 +32,12 @@
     <Compile Update="Views\AddCustomerDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AddProductDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProductPriceHistoryDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -121,6 +121,8 @@ public partial class ServicesViewModel : ObservableObject, INavigationAware
         context.Remove(service);
 
         await context.SaveChangesAsync();
+
+        await RefreshDataAsync();
     }
 
     [RelayCommand(CanExecute = nameof(CanEdit))]

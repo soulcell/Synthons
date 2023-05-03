@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
     xmlns:properties="clr-namespace:Synthons.WPF.Properties" 
-    xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels" 
-    d:DataContext="{d:DesignInstance Type=viewmodels:ProductsViewModel}"
+    xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels"
+    md:DialogServiceViews.IsRegistered="True"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ProductsViewModel}"
     d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,27 +21,29 @@
             Style="{StaticResource PageTitleStyle}"
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.ProductsPageTitle}" />
-        <Grid Grid.Row="1">
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddProductCommand}" Content="Добавить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding EditProductCommand}" Content="Изменить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding DeleteProductCommand}" Content="Удалить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+                <Button Command="{Binding ShowPriceHistoryCommand}" Content="История цен" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+            </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal"
                 CanUserAddRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding Source}"
+                SelectedItem="{Binding SelectedProduct}"
                 Margin="{StaticResource SmallLeftRightMargin}"
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
-                    <!--
-                        TODO:
-                        Remove this column definitions and define columns for your data.
-                        Consider adding header properties to Resources.resw
-                    -->
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding CurrentPrice}" Header="Price"/>
-                    <DataGridTextColumn Binding="{Binding Manufacturer}" Header="Manufacturer"/>
-                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Название" />
+                    <DataGridTextColumn Binding="{Binding CurrentPrice}" Header="Цена"/>
+                    <DataGridTextColumn Binding="{Binding Manufacturer}" Header="Производитель"/>
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Описание" />
                 </DataGrid.Columns>
             </DataGrid>
-        </Grid>
+        </StackPanel>
     </Grid>
 </Page>
