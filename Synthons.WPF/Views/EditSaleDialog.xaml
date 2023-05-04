@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="Synthons.WPF.Views.AddSaleDialog"
+﻿<controls:MetroWindow x:Class="Synthons.WPF.Views.EditSaleDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,16 +8,23 @@
         xmlns:local="clr-namespace:Synthons.WPF.Views"
         xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels"
         md:DialogServiceViews.IsRegistered="True"
-        d:DataContext="{d:DesignInstance Type=viewmodels:AddSaleViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:EditSaleViewModel}"
         mc:Ignorable="d"
         Style="{StaticResource CustomMetroWindow}"
-        Title="Добавить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" >
+        Title="Изменить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" >
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
         <Label>Клиент:</Label>
-        <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" DisplayMemberPath="FullName"/>
-        <Label>Заказ оформлен сотрудником:</Label>
-        <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" DisplayMemberPath="FullName"/>
-        <Label>Товары:</Label>
+        <TextBlock 
+            Text="{Binding Sale.Customer.FullName, FallbackValue=Клиент}" 
+            FontSize="{StaticResource LargeFontSize}" 
+            HorizontalAlignment="Right"
+            />
+        <Label Margin="{StaticResource SmallTopMargin}">Заказ оформлен сотрудником:</Label>
+        <TextBlock 
+            Text="{Binding Sale.Employee.FullName, FallbackValue=Сотрудник}" 
+            FontSize="{StaticResource LargeFontSize}" 
+            HorizontalAlignment="Right"/>
+        <Label Margin="{StaticResource SmallTopMargin}">Товары:</Label>
         <StackPanel Orientation="Horizontal">
             <Button Command="{Binding AddProductCommand}" Margin="{StaticResource SmallRightMargin}">Добавить</Button>
             <Button Command="{Binding RemoveSaleProductCommand}">Удалить</Button>
@@ -39,7 +46,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label>Услуги:</Label>
+        <Label Margin="{StaticResource SmallTopMargin}">Услуги:</Label>
         <StackPanel Orientation="Horizontal">
             <Button Command="{Binding AddServiceCommand}" Margin="{StaticResource SmallRightMargin}">Добавить</Button>
             <Button Command="{Binding RemoveSaleServiceCommand}">Удалить</Button>

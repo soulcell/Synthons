@@ -1,71 +1,136 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using MvvmDialogs;
 using Synthons.Domain;
 using Synthons.Infrastructure;
-using Synthons.WPF.Contracts.ViewModels;
+using Synthons.WPF.Views;
 
 namespace Synthons.WPF.ViewModels;
-
-public class EditSaleViewModel : ObservableObject, INavigationAware
+public partial class EditSaleViewModel : ObservableObject, IModalDialogViewModel
 {
-    private readonly SynthonsDbContext _context;
+    private readonly SynthonsDbContext context;
+    private readonly IDialogService dialogService;
+    private readonly List<Customer> customers;
+    private readonly List<Employee> employees;
+    private readonly List<Product> products;
+    private readonly List<Service> services;
+    [ObservableProperty]
+    private bool? dialogResult;
 
-    public Sale Sale
+    public Sale Sale { get; set; }
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RemoveSaleProductCommand))]
+    private SaleProduct? selectedSaleProduct;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RemoveSaleServiceCommand))]
+    private SaleService? selectedSaleService;
+
+    [ObservableProperty]
+    private bool isPaid = false;
+
+    public decimal? Total => SaleProducts.Select(x => x.TotalPrice).Sum() + SaleServices.Select(x => x.Price).Sum();
+
+    public ObservableCollection<SaleProduct> SaleProducts { get; }
+    public ObservableCollection<SaleService> SaleServices { get; }
+
+    public EditSaleViewModel(
+        SynthonsDbContext context,
+        IDialogService dialogService,
+        Sale sale)
     {
-        get;
-        private set;
+        this.context = context;
+        this.dialogService = dialogService;
+        Sale = sale;
+
+        SaleProducts = new ObservableCollection<SaleProduct>(sale.SaleProducts.ToList());
+        SaleServices = new ObservableCollection<SaleService>(sale.SaleServices.ToList());
+
+        SaleProducts.CollectionChanged += SaleProductsOrServicesChanged;
+        SaleServices.CollectionChanged += SaleProductsOrServicesChanged;
     }
 
-    public ObservableCollection<Employee> Employees 
+    [RelayCommand]
+    private async Task AddProductAsync()
     {
-        get; private set; 
-    }
-    public ObservableCollection<Customer> Customers
-    {
-        get; private set;
-    }
-    public ObservableCollection<Product> Products
-    {
-        get; private set;
-    }
-    public ObservableCollection<Service> Services
-    {
-        get; private set;
-    }
+        var products = await context.Products.Include(p => p.ProductPrices).ToListAsync();
 
-    public EditSaleViewModel(SynthonsDbContext context)
-    {
-        _context = context;
-    }
+        var dialogViewModel = new AddProductToSaleViewModel(products);
 
-    private ICommand _testCommand;
+        var success = dialogService.ShowDialog<AddProductToSaleDialog>(this, dialogViewModel);
 
-    public ICommand TestCommand => _testCommand ?? (_testCommand = new RelayCommand(OnTest));
+        if (success != true) return;
 
-    public void OnNavigatedFrom() { }
-    public async void OnNavigatedTo(object parameter)
-    {
-        Sale = parameter as Sale;
+        var product = dialogViewModel.SelectedProduct;
 
-        //Employees = new ObservableCollection<Employee>(await _context.Employees.ToListAsync());
-        await _context.Employees.LoadAsync();
-        Employees = _context.Employees.Local.ToObservableCollection();
+        if (product == null) return;
 
-        await _context.Customers.LoadAsync();
-        Customers = _context.Customers.Local.ToObservableCollection();
+        var saleProduct = new SaleProduct()
+        {
+            Product = product,
+            UnitPrice = (decimal)product.CurrentPrice,
+            Qty = (int)dialogViewModel.Quantity,
+            TotalPrice = dialogViewModel.TotalPrice
+        };
 
-        await _context.Products.Include(p => p.ProductPrices).LoadAsync();
-        Products = _context.Products.Local.ToObservableCollection();
-
-        await _context.Services.Include(s => s.ServicePrices).LoadAsync();
-        Services = _context.Services.Local.ToObservableCollection();
+        SaleProducts.Add(saleProduct);
     }
 
-    private void OnTest()
+    [RelayCommand(CanExecute = nameof(CanRemoveSaleProduct))]
+    private void RemoveSaleProduct()
     {
-        var test = 0;
+        SaleProducts.Remove(SelectedSaleProduct);
     }
+
+    [RelayCommand]
+    private async Task AddServiceAsync()
+    {
+        var services = await context.Services.Include(p => p.ServicePrices).ToListAsync();
+
+        var dialogViewModel = new AddServiceToSaleViewModel(services);
+
+        var success = dialogService.ShowDialog<AddServiceToSaleDialog>(this, dialogViewModel);
+
+        if (success != true) return;
+
+        var service = dialogViewModel.SelectedService;
+
+        if (service == null) return;
+
+        var saleService = new SaleService()
+        {
+            Service = service,
+            Price = (decimal)service.CurrentPrice,
+        };
+
+        SaleServices.Add(saleService);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanRemoveSaleService))]
+    private void RemoveSaleService()
+    {
+        SaleServices.Remove(SelectedSaleService);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanOk))]
+    private void Ok()
+    {
+        DialogResult = true;
+    }
+
+
+    private void SaleProductsOrServicesChanged(object sender, EventArgs e)
+    {
+        OnPropertyChanged(nameof(Total));
+        OkCommand.NotifyCanExecuteChanged();
+    }
+
+    private bool CanRemoveSaleProduct() => SelectedSaleProduct != null;
+    private bool CanRemoveSaleService() => SelectedSaleService != null;
+
+    private bool CanOk() => !SaleProducts.IsNullOrEmpty() || !SaleServices.IsNullOrEmpty();
 }

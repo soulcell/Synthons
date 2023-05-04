@@ -22,7 +22,6 @@ public class PageService : IPageService
         Configure<CustomersViewModel, CustomersPage>();
         Configure<EmployeesViewModel, EmployeesPage>();
         Configure<SettingsViewModel, SettingsPage>();
-        Configure<EditSaleViewModel, EditSalePage>();
     }
 
     public Type GetPageType(string key)

@@ -107,16 +107,6 @@ public partial class App : Application
         services.AddTransient<IShellDialogWindow, ShellDialogWindow>();
         services.AddTransient<ShellDialogViewModel>();
 
-
-        services.AddTransient<EditSaleViewModel>();
-        services.AddTransient<EditSalePage>();
-
-        services.AddTransient<AddSaleViewModel>();
-        services.AddTransient<AddSaleDialog>();
-
-        services.AddTransient<AddEmployeeViewModel>();
-        services.AddTransient<AddEmployeeDialog>();
-
         // Configuration
         services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
     }

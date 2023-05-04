@@ -39,7 +39,7 @@
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Название" />
-                    <DataGridTextColumn Binding="{Binding CurrentPrice}" Header="Цена"/>
+                    <DataGridTextColumn Binding="{Binding CurrentPrice, StringFormat=C}" Header="Цена"/>
                     <DataGridTextColumn Binding="{Binding Manufacturer}" Header="Производитель"/>
                     <DataGridTextColumn Binding="{Binding Description}" Header="Описание" />
                 </DataGrid.Columns>

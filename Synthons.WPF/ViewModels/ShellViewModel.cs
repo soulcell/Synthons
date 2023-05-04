@@ -42,7 +42,6 @@ public class ShellViewModel : ObservableObject
         new HamburgerMenuGlyphItem() { Label = Resources.ShellServicesPage, Glyph = "\uE90F", TargetPageType = typeof(ServicesViewModel) },
         new HamburgerMenuGlyphItem() { Label = Resources.ShellCustomersPage, Glyph = "\uE77B", TargetPageType = typeof(CustomersViewModel) },
         new HamburgerMenuGlyphItem() { Label = Resources.ShellEmployeesPage, Glyph = "\uE631", TargetPageType = typeof(EmployeesViewModel) },
-        new HamburgerMenuGlyphItem() { Label = Resources.ShellEditSalePage, Glyph = "\uE8A5", TargetPageType = typeof(EditSaleViewModel) },
     };
 
     public ObservableCollection<HamburgerMenuItem> OptionMenuItems { get; } = new ObservableCollection<HamburgerMenuItem>()

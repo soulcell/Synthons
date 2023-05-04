@@ -124,7 +124,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Курсовая работа по предмету &quot;Базы Данных&quot;\nВыполнил студент гр. 10701320 Солодков А.В..
+        ///   Looks up a localized string similar to Курсовая работа по предмету &quot;Базы Данных&quot;. Выполнил студент гр. 10701320 Солодков А.В..
         /// </summary>
         public static string SettingsPageAboutText {
             get {
@@ -241,7 +241,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open or close navigation.
+        ///   Looks up a localized string similar to Открыть/закрыть навигацию.
         /// </summary>
         public static string ShellHamburgerButtonName {
             get {

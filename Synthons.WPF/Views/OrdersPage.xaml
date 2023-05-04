@@ -26,6 +26,8 @@
             Orientation="Horizontal"
             Margin="{StaticResource SmallLeftTopRightBottomMargin}">
                 <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding AddSaleCommand}">Добавить</Button>
+                <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding EditSaleCommand}">Изменить</Button>
+                <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding RemoveSaleCommand}">Удалить</Button>
                 <Button Margin="{StaticResource SmallRightMargin}">Фильтр</Button>
             </StackPanel>
             <DataGrid
@@ -34,6 +36,7 @@
                 CanUserAddRows="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding Source}"
+                SelectedItem="{Binding SelectedSale}"
                 Margin="{StaticResource SmallLeftRightMargin}"
                 KeyboardNavigation.TabNavigation="Once">
                 <DataGrid.Columns>
