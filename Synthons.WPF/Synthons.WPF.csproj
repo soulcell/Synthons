@@ -11,6 +11,7 @@
   
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="7.1.4" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
@@ -21,6 +22,7 @@
     <ProjectReference Include="..\Synthons.Domain\Synthons.Domain.csproj" />
     <ProjectReference Include="..\Synthons.Infrastructure\Synthons.Infrastructure.csproj" />
     <ProjectReference Include="..\Synthons.WPF.Core\Synthons.WPF.Core.csproj" />
+    <ProjectReference Include="..\Synthons.WPF.Reporting\Synthons.WPF.Reporting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FilterSalesDialog.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AddCustomerDialog.xaml.cs">
       <SubType>Code</SubType>

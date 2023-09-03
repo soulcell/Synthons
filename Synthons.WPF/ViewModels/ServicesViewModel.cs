@@ -7,8 +7,6 @@ using MvvmDialogs;
 using Synthons.Domain;
 using Synthons.Infrastructure;
 using Synthons.WPF.Contracts.ViewModels;
-using Synthons.WPF.Core.Contracts.Services;
-using Synthons.WPF.Core.Models;
 using Synthons.WPF.Views;
 
 namespace Synthons.WPF.ViewModels;

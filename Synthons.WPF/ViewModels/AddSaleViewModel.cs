@@ -13,7 +13,6 @@ public partial class AddSaleViewModel : ObservableObject, IModalDialogViewModel
 {
     private readonly SynthonsDbContext context;
     private readonly IDialogService dialogService;
-    private readonly List<Customer> customers;
     private readonly List<Employee> employees;
     private readonly List<Product> products;
     private readonly List<Service> services;
@@ -39,7 +38,9 @@ public partial class AddSaleViewModel : ObservableObject, IModalDialogViewModel
     [ObservableProperty]
     private bool isPaid = false;
 
-    public List<Customer> Customers => customers;
+    [ObservableProperty]
+    private List<Customer> customers;
+
     public List<Employee> Employees => employees;
 
     public decimal? Total => SaleProducts.Select(x => x.TotalPrice).Sum() + SaleServices.Select(x => x.Price).Sum();
@@ -55,8 +56,9 @@ public partial class AddSaleViewModel : ObservableObject, IModalDialogViewModel
     {
         this.context = context;
         this.dialogService = dialogService;
-        this.customers = customers;
         this.employees = employees;
+
+        Customers = customers;
 
         SaleProducts.CollectionChanged += SaleProductsOrServicesChanged;
         SaleServices.CollectionChanged += SaleProductsOrServicesChanged;
@@ -128,6 +130,34 @@ public partial class AddSaleViewModel : ObservableObject, IModalDialogViewModel
     private void Ok()
     {
         DialogResult = true;
+    }
+
+    [RelayCommand]
+    private async Task NewCustomerAsync()
+    {
+        var dialogViewModel = new AddCustomerViewModel(context);
+
+        var success = dialogService.ShowDialog<AddCustomerDialog>(this, dialogViewModel);
+
+        if (success != true) return;
+
+        var newCustomer = new Customer()
+        {
+            LastName = dialogViewModel.LastName,
+            FirstName = dialogViewModel.FirstName,
+            MiddleName = dialogViewModel.MiddleName,
+            BirthDate = dialogViewModel.BirthDate,
+            PhoneNumber = dialogViewModel.PhoneNumber,
+            EmailAddress = dialogViewModel.EmailAddress
+        };
+
+        await context.Customers.AddAsync(newCustomer);
+
+        await context.SaveChangesAsync();
+
+        Customers = await context.Customers.ToListAsync();
+
+        SelectedCustomer = newCustomer;
     }
 
 

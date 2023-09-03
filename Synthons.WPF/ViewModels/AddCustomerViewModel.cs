@@ -31,9 +31,13 @@ public partial class AddCustomerViewModel : ObservableObject, IModalDialogViewMo
     [ObservableProperty]
     private string? emailAddress;
 
+    public string Title { get; }
+
     public AddCustomerViewModel(SynthonsDbContext context)
     {
         _context = context;
+
+        Title = "Добавить клиента";
     }
     public AddCustomerViewModel(SynthonsDbContext context, Customer customer)
     {
@@ -45,6 +49,8 @@ public partial class AddCustomerViewModel : ObservableObject, IModalDialogViewMo
         BirthDate = customer.BirthDate;
         PhoneNumber = customer.PhoneNumber;
         EmailAddress = customer.EmailAddress;
+
+        Title = $"Изменить клиента {customer.FullName}";
     }
     public bool? DialogResult
     {

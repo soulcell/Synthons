@@ -11,7 +11,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:EditSaleViewModel}"
         mc:Ignorable="d"
         Style="{StaticResource CustomMetroWindow}"
-        Title="Изменить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" >
+        Title="Изменить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" WindowStartupLocation="CenterOwner">
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
         <Label>Клиент:</Label>
         <TextBlock 

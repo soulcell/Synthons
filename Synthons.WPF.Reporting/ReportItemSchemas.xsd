@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" id="ReportItemSchemas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Customer" nillable="true" type="Customer" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LastName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MiddleName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BirthDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Employee" nillable="true" type="Employee" />
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="EmployeeId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LastName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MiddleName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="BirthDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Product" nillable="true" type="Product" />
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductPrice" nillable="true" type="ProductPrice" />
+  <xs:complexType name="ProductPrice">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductPriceId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AssignmentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Product" type="Product" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sale" nillable="true" type="Sale" />
+  <xs:complexType name="Sale">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CustomerId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="EmployeeId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="OrderDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PaymentDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalDue" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Customer" type="Customer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Employee" type="Employee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaleProduct" nillable="true" type="SaleProduct" />
+  <xs:complexType name="SaleProduct">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleProductId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Qty" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Product" type="Product" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Sale" type="Sale" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SaleService" nillable="true" type="SaleService" />
+  <xs:complexType name="SaleService">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleServiceId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Sale" type="Sale" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Service" type="Service" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Service">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Service" nillable="true" type="Service" />
+  <xs:element name="ServicePrice" nillable="true" type="ServicePrice" />
+  <xs:complexType name="ServicePrice">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ServicePriceId" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AssignmentDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Service" type="Service" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ViProductSoldTotal" nillable="true" type="ViProductSoldTotal" />
+  <xs:complexType name="ViProductSoldTotal">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ProductId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalSold" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalPrice" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ViSalesJournal" nillable="true" type="ViSalesJournal" />
+  <xs:complexType name="ViSalesJournal">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SaleId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Customer" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Employee" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PaymentDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalDue" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ViServiceSoldTotal" nillable="true" type="ViServiceSoldTotal" />
+  <xs:complexType name="ViServiceSoldTotal">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalSold" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalPrice" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

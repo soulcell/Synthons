@@ -8,7 +8,9 @@
         xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:ServicePriceHistoryViewModel}"
         mc:Ignorable="d"
-        Title="История цен на услугу" Width="400" SizeToContent="Height">
+        Title="История цен на услугу" Width="400" SizeToContent="Height"
+                      ResizeMode="CanMinimize"
+                      WindowStartupLocation="CenterOwner">
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
         <TextBlock 
             Text="{Binding Service.Name}" 
@@ -20,6 +22,7 @@
             ItemsSource="{Binding Service.ServicePrices}"
             AutoGenerateColumns="False"
             IsReadOnly="True"
+            GridLinesVisibility="Horizontal"
         >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding AssignmentDate}" Header="Время назначения" />

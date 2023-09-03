@@ -26,9 +26,12 @@ public partial class AddEmployeeViewModel : ObservableObject, IModalDialogViewMo
     [ObservableProperty]
     private DateTime? birthDate;
 
+    public string Title { get; }
     public AddEmployeeViewModel(SynthonsDbContext context)
     {
         _context = context;
+
+        Title = "Добавить сотрудника";
     }
     public AddEmployeeViewModel(SynthonsDbContext context, Employee employee)
     {
@@ -38,6 +41,8 @@ public partial class AddEmployeeViewModel : ObservableObject, IModalDialogViewMo
         FirstName = employee.FirstName;
         MiddleName = employee.MiddleName;
         BirthDate = employee.BirthDate;
+
+        Title = $"Изменить сотрудника {employee.FullName}";
     }
     public bool? DialogResult
     {

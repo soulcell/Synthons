@@ -61,7 +61,7 @@ namespace Synthons.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Synthons.WPF.
+        ///   Looks up a localized string similar to SYNTHONS.
         /// </summary>
         public static string AppDisplayName {
             get {

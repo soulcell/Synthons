@@ -28,7 +28,8 @@
                 <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding AddSaleCommand}">Добавить</Button>
                 <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding EditSaleCommand}">Изменить</Button>
                 <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding RemoveSaleCommand}">Удалить</Button>
-                <Button Margin="{StaticResource SmallRightMargin}">Фильтр</Button>
+                <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding FilterSalesCommand}">Фильтр</Button>
+                <Button Margin="{StaticResource SmallRightMargin}" Command="{Binding ShowReportCommand}">Отчёт</Button>
             </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
@@ -54,8 +55,8 @@
                                     ItemsSource="{Binding SaleProducts}" 
                                     HeadersVisibility="None">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Product.Name}"/>
                                         <DataGridTextColumn Binding="{Binding Qty}"/>
+                                        <DataGridTextColumn Binding="{Binding Product.Name}"/>
                                         <DataGridTextColumn Binding="{Binding TotalPrice, StringFormat=C}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>

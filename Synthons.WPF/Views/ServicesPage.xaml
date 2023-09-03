@@ -22,11 +22,13 @@
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.ServicesPageTitle}" />
         <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding AddServiceCommand}" Content="Добавить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Command="{Binding EditServiceCommand}" Content="Изменить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Command="{Binding DeleteServiceCommand}" Content="Удалить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Command="{Binding ShowPriceHistoryCommand}" Content="История цен" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+                <Button Command="{Binding AddServiceCommand}" Content="Добавить" Margin="{StaticResource SmallRightMargin}"/>
+                <Button Command="{Binding EditServiceCommand}" Content="Изменить" Margin="{StaticResource SmallRightMargin}"/>
+                <Button Command="{Binding DeleteServiceCommand}" Content="Удалить" Margin="{StaticResource SmallRightMargin}"/>
+                <Button Command="{Binding ShowPriceHistoryCommand}" Content="История цен" Margin="{StaticResource SmallRightMargin}"/>
             </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"

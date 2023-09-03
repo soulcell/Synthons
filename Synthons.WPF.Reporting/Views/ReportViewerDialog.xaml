@@ -1,0 +1,33 @@
+﻿<controls:MetroWindow x:Class="Synthons.WPF.Reporting.Views.ReportViewerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:Synthons.WPF.Reporting.Views"
+        xmlns:rvm="clr-namespace:Synthons.WPF.Reporting.ViewModels"
+        d:DataContext="{d:DesignInstance Type=rvm:ReportViewerViewModel}"
+        mc:Ignorable="d"
+        Title="Отчёт продаж" Height="450" Width="600">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+            <Label>C:</Label>
+            <DatePicker SelectedDate="{Binding StartDate}" DisplayDateEnd="{Binding EndDate}" Margin="{StaticResource SmallLeftMargin}"/>
+            <Label Margin="{StaticResource MediumLeftMargin}">По:</Label>
+            <DatePicker SelectedDate="{Binding EndDate}" DisplayDateStart="{Binding StartDate}" Margin="{StaticResource SmallLeftMargin}"/>
+            <Label Margin="{StaticResource MediumLeftMargin}">Товар:</Label>
+            <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" DisplayMemberPath="Name" Margin="{StaticResource SmallLeftMargin}"/>
+        </StackPanel>
+        <ContentPresenter Content="{Binding Viewer}" Grid.Row="1"/>
+    </Grid>
+</controls:MetroWindow>

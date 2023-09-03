@@ -11,10 +11,22 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:AddSaleViewModel}"
         mc:Ignorable="d"
         Style="{StaticResource CustomMetroWindow}"
-        Title="Добавить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" >
+        Title="Добавить продажу" Width="450" SizeToContent="Height" d:DesignHeight="481.596" 
+                      WindowStartupLocation="CenterOwner">
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
         <Label>Клиент:</Label>
-        <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" DisplayMemberPath="FullName"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="28"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox 
+                ItemsSource="{Binding Customers}" 
+                SelectedItem="{Binding SelectedCustomer}" 
+                DisplayMemberPath="FullName" 
+                Margin="{StaticResource SmallRightMargin}"/>
+            <Button Command="{Binding NewCustomerCommand}" Content="+" Grid.Column="1"/>
+        </Grid>
         <Label>Заказ оформлен сотрудником:</Label>
         <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" DisplayMemberPath="FullName"/>
         <Label>Товары:</Label>

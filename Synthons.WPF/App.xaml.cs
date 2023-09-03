@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Threading;
 
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +41,13 @@ public partial class App : Application
 
     private async void OnStartup(object sender, StartupEventArgs e)
     {
+
+        //Sets culture in the entire app depending on system settings automatically
+        Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;
+        Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
+        FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(
+            XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name)));
+
         var appLocation = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         // For more information about .NET generic host see  https://docs.microsoft.com/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0
@@ -71,7 +80,6 @@ public partial class App : Application
         services.AddSingleton<ISystemService, SystemService>();
         services.AddSingleton<IPersistAndRestoreService, PersistAndRestoreService>();
         services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-        services.AddSingleton<ISampleDataService, SampleDataService>();
         services.AddSingleton<IPageService, PageService>();
         services.AddSingleton<INavigationService, NavigationService>();
         

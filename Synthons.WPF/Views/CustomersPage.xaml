@@ -22,10 +22,12 @@
             Margin="{StaticResource MediumLeftMargin}"
             Text="{x:Static properties:Resources.CustomersPageTitle}" />
         <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding AddCustomerCommand}" Content="Добавить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Command="{Binding EditCustomerCommand}" Content="Изменить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
-                <Button Command="{Binding DeleteCustomerCommand}" Content="Удалить" Margin="{StaticResource SmallLeftTopRightBottomMargin}"/>
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+                <Button Command="{Binding AddCustomerCommand}" Content="Добавить" Margin="{StaticResource SmallRightMargin}"/>
+                <Button Command="{Binding EditCustomerCommand}" Content="Изменить" Margin="{StaticResource SmallRightMargin}"/>
+                <Button Command="{Binding DeleteCustomerCommand}" Content="Удалить" Margin="{StaticResource SmallRightMargin}"/>
             </StackPanel>
             <DataGrid
                 AutoGenerateColumns="False"
@@ -42,7 +44,7 @@
                     <DataGridTextColumn Binding="{Binding MiddleName}" Header="Отчество" />
                     <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Телефон" />
                     <DataGridTextColumn Binding="{Binding EmailAddress}" Header="Email" />
-                    <DataGridTextColumn Binding="{Binding BirthDate}" Header="Дата рождения" />
+                    <DataGridTextColumn Binding="{Binding BirthDate, StringFormat=d}" Header="Дата рождения" />
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

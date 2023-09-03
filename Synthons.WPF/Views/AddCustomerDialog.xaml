@@ -8,7 +8,9 @@
         xmlns:viewmodels="clr-namespace:Synthons.WPF.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:AddCustomerViewModel}"
         mc:Ignorable="d"
-        Title="Добавить клиента" Width="400" SizeToContent="Height">
+        Title="{Binding Title}" 
+        Width="400" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner">
     <StackPanel Margin="{StaticResource SmallLeftTopRightBottomMargin}">
         <Label>Фамилия:</Label>
         <TextBox Text="{Binding LastName}"/>
@@ -21,7 +23,7 @@
         <Label>Номер телефона:</Label>
         <TextBox Text="{Binding PhoneNumber}"/>
         <Label>Email:</Label>
-        <TextBox Text="{Binding PhoneNumber}"/>
+        <TextBox Text="{Binding EmailAddress}"/>
         <Button Command="{Binding OkCommand}" Content="Ok" Margin="{StaticResource MediumTopMargin}"/>
     </StackPanel>
 </controls:MetroWindow>
